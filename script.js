@@ -1,7 +1,6 @@
 //Building tic tac toe
 //For the X character use the string "X"
 //For the O character use the string "O"
-//Put a specific class to select the inner rows and add an event listener to each of them? 
 // How to tell which players turn it is? P1 vs. P2
 // Need to ensure each click alternates between X and O
 // create variables for each of the 8 win conditions
@@ -12,11 +11,11 @@
 3-1    3-2    3-3
 */
 
-//Pseudo code
+// you're using a forEach beause querySelectorAll returns an array
+// this is essentially adding an event listener on each div element
 document.querySelectorAll('div').forEach(el => {
     el.addEventListener('click', () => xOrO(el));
 });
-// let div = document.querySelectorAll('div').addEventListener('click', xOrO);
 
 let playerXTurn = true;
 
@@ -75,28 +74,12 @@ function checkWinCondition() {
     const topHorizontal = compareValues(row_1_1, row_1_2, row_1_3)
     const midHorizontal = compareValues(row_2_1, row_2_2, row_2_3)
     const bottomHorizontal = compareValues(row_3_1, row_3_2, row_3_3)
+    const leftVertical = compareValues(row_1_1, row_2_1, row_3_1)
+    const middleVertical = compareValues(row_1_2, row_2_2, row_3_2)
+    const rightVertical = compareValues(row_1_3, row_2_3, row_3_3)
+    const rightDiagonal = compareValues(row_1_1, row_2_2, row_3_3)
+    const leftDiagonal = compareValues(row_1_3, row_2_2, row_3_1)
 
-    const leftVertical = (
-        (row_1_1 !== "" && row_2_1 !== "" && row_3_1 !== "") &&
-        (row_1_1 === row_2_1 && row_2_1 === row_3_1)
-    )
-    const middleVertical = (
-        (row_1_2 !== "" && row_2_2 !== "" && row_3_2 !== "") &&
-        row_1_2 === row_2_2 && row_2_2 === row_3_2
-    )
-    const rightVertical = (
-        (row_1_3 !== "" && row_2_3 !== "" && row_3_3 !== "") & 
-        row_1_3 === row_2_3 && row_1_3 === row_3_3
-    )
-
-    const rightDiagonal = (
-        (row_1_1 !== "" && row_2_2 !== "" && row_3_3 !== "") &&
-        row_1_1 === row_2_2 && row_1_1 === row_3_3
-    )
-    const leftDiagonal = (
-        (row_1_3 !== "" && row_2_2 !== "" && row_3_1 !== "") && 
-        row_1_3 === row_2_2 && row_1_3 === row_3_1
-    )
 
     const win = [
         topHorizontal, midHorizontal, bottomHorizontal, 
